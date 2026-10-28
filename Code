@@ -1,455 +1,151 @@
 
 # ============================================================
-# PROYECTO: NOVELA VISUAL
-# Materia: Motores Gráficos Aplicados a Videojuegos
+# MINI JUEGO DIDÁCTICO - REN'PY
 # ============================================================
-
-# DECLARACIÓN DE PERSONAJES
 
 define osi = Character("Osiris", color="#DA6FF7")
 define led = Character("Ledesma", color="#20FAF2")
 define mk = Character("Mankito", color="#5A21ED")
 
-# DECLARACIÓN DE SPRITES
 
-image chico = "chico.png"
-image chico enfadado = "chicoenfadado.png"
-image chico sonrie = "chicosonrie.png"
-image chico sonrie flip = im.Flip("chicosonrie.png", horizontal=True)
+# ------------------------------------------------------------
+# SPRITES
+# ------------------------------------------------------------
 
-# TRANSFORMACIONES
+image chico = "images/chico.png"
+image chico enfadado = "images/chicoenfadado.png"
+image chico sonrie = "images/chicosonrie.png"
+image chica = "images/chica.png"
 
-transform chico_normal:
-    xzoom 0.75
-    yzoom 0.75
+# Mismo sprite, volteado horizontalmente
+image chico volteado = im.Flip("images/chico.png", horizontal=True)
 
-transform chica_normal:
-    xzoom 0.25
-    yzoom 0.25
 
-transform chica_derecha:
-    xalign 0.70
+# ------------------------------------------------------------
+# TRANSFORMACIONES: POSICIÓN
+# ------------------------------------------------------------
+
+transform izquierda:
+    xalign 0.25
     yalign 1.0
-    xzoom 0.25
-    yzoom 0.25
 
-transform chico_izquierda:
-    xalign 0.30
+transform derecha:
+    xalign 0.75
     yalign 1.0
-    xzoom -0.75
-    yzoom 0.75
+
+transform centro:
+    xalign 0.5
+    yalign 1.0
 
 
 # ============================================================
-# COMIENZO DEL JUEGO
+# INICIO
 # ============================================================
 
 label start:
 
+    # Cambiar fondo
     scene atardecer
+    play music "music/sovereign.mp3" loop fadein 1.0
 
-    play music "music/music.wav" loop fadein 1.0
+    "Mankito tenía una idea. Eso nunca era una buena señal."
 
-    "Llevaba toda la tarde pensando en qué decirle a Osiris."
+    # Mostrar un personaje en pantalla
+    show chico at izquierda with dissolve
 
-    "Había ensayado frente al espejo, escrito posibles conversaciones en el celular y hasta comprado una tarjeta en el OXXO."
+    mk "¡Ledesma! ¡Tengo una misión para vos!"
 
-    "Una tarjeta. En pleno siglo XXI."
+    # Cambiar la expresión del personaje
+    show chico enfadado at izquierda with dissolve
 
-    "Pero cuando uno está enamorado, la dignidad es lo primero que pierde."
+    led "¿Por qué siento que voy a arrepentirme?"
 
-    "Solo tenía que encontrarlo, saludarlo y decir algo normal."
+    # Mostrar otro personaje a la derecha
+    show chica at derecha with dissolve
 
-    "Algo como: 'Hola, ¿cómo estás?'"
+    osi "¿Qué están haciendo?"
 
-    "Era imposible que saliera mal."
-
-    # ENTRA MANKITO
-
-    show chico at chico_normal
-
-    mk "¡LEDEEESMA!"
-
-    "La voz de Mankito atravesó el patio como una alarma de incendio."
-
-    led "No."
-
-    mk "¿Cómo que no? Ni siquiera te dije qué quería."
-
-    led "Porque te conozco."
-
-    mk "Una partida de LoL, unas papitas y después vemos qué pasa."
-
-    led "Tengo cosas que hacer."
-
-    mk "¿Qué cosas?"
-
-    led "Cosas."
-
-    mk "Ah, ya entendí. Estás pensando en Osiris."
-
-    "Me quedé inmóvil."
-
-    led "¿Podés hablar un poquito más bajo?"
-
-    mk "¡ESTÁ PENSANDO EN OSIRIS!"
-
-    led "Te voy a tirar por las escaleras."
-
-    mk "Eso significa que sí."
-
-    "Mankito era mi mejor amigo. También era la razón por la que necesitaba vacaciones de mi mejor amigo."
-
-    mk "Escuchame. Si te gusta, hablale."
-
-    led "Gracias, gurú del amor."
-
-    mk "De nada. Mi tarifa son unas papitas."
-
-    "Me acomodé la ropa y revisé que todavía tuviera la tarjeta en el bolsillo."
-
-    "Todo estaba bajo control."
-
-    mk "¿Y qué le vas a decir?"
-
-    led "No sé."
-
-    mk "Perfecto. Improvisá."
-
-    led "Tu consejo es una porquería."
-
-    mk "Pero es gratis."
-
-    # SE ANUNCIA LA LLEGADA DE OSIRIS
-
-    "Entonces vi a Osiris acercándose por el patio."
-
-    "Mi corazón decidió que era un excelente momento para dejar de funcionar."
-
-    show chica at chica_derecha behind chico with dissolve
-
-    "Osiris venía mirando el celular, completamente ajeno al desastre emocional que estaba ocurriendo a pocos metros."
-
-    led "Mankito, por favor. Andate."
-
-    mk "¿Por qué? Si yo te estoy ayudando."
-
-    led "Porque estás gritando y porque necesito hablar con él."
-
-    mk "Ah, claro. Querés privacidad."
-
-    led "Exactamente."
-
-    mk "Entendido."
-
-    "Por primera vez en su vida, Mankito pareció comprender una instrucción sencilla."
-
+    # Reproducir un efecto de sonido
     play sound "sound/tower_clock.ogg"
-    queue sound "sound/tower_clock.ogg"
 
-    mk "Bueno, me voy."
+    mk "¡Tenés que decirle algo importante a Osiris!"
 
-    "Dio dos pasos."
+    led "¡MANKITO!"
 
-    mk "¡PERO DESPUÉS ME CONTÁS TODO!"
-
-    led "¡ANDATE!"
-
+    # Ocultar un personaje
     hide chico with dissolve
 
-    "Mankito desapareció por el pasillo, probablemente en busca de otra persona a la que arruinarle la tarde."
+    # Volver a mostrar el personaje con otra expresión
+    show chico sonrie at izquierda with dissolve
 
-    show chica at center with move
+    led "Bueno... quizá tenga algo que decirte."
 
-    stop music fadeout 1.0
+    # Demostrar el volteo horizontal del sprite
+    hide chico
+    show chico volteado at izquierda with dissolve
 
-    osi "¿Estabas discutiendo con Mankito otra vez?"
+    "Ledesma se da vuelta, intentando disimular sus nervios."
 
-    led "No. Bueno, sí. Es complicado."
+    # Movimiento entre posiciones
+    show chico volteado at centro with move
 
-    osi "¿Qué hizo ahora?"
+    osi "¿Me lo vas a contar o no?"
 
-    led "Lo de siempre. Intentar convencerme de que jugar al LoL es una actividad productiva."
-
-    osi "Tiene sus prioridades claras."
-
-    led "Ojalá yo tuviera las mías."
-
-    "Osiris sonrió."
-
-    "Había imaginado ese momento tantas veces que ahora no sabía qué hacer con él."
-
-    play music "music/sovereign.mp3" fadein 0.5
-
-    osi "¿Estás bien? Parecés nervioso."
-
-    led "¿Yo? Para nada."
-
-    osi "Estás hablando como si estuvieras rindiendo un examen."
-
-    led "Es mi voz normal."
-
-    osi "Ledesma, te conozco."
-
-    "Eso era lo peor."
-
-    "Osiris me conocía lo suficiente como para notar que algo me pasaba, pero no lo suficiente como para saber qué era."
-
-    osi "¿Querías decirme algo?"
-
-    "La tarjeta del OXXO pesaba como una tonelada dentro de mi bolsillo."
-
-    # DECISIÓN PRINCIPAL
+    # --------------------------------------------------------
+    # MENÚ: EL JUGADOR ELIGE UNA RUTA
+    # --------------------------------------------------------
 
     menu:
-        "Decirle la verdad.":
-            jump confesion
+        "Decir la verdad":
+            jump final_bueno
 
-        "Cambiar de tema y ganar tiempo.":
-            jump evitar_confesion
-
-
-# ============================================================
-# RUTA 1: CONFESIÓN
-# ============================================================
-
-label confesion:
-
-    led "Sí. Quería decirte algo."
-
-    osi "Te escucho."
-
-    "Respiré profundamente."
-
-    led "Me gusta pasar tiempo contigo."
-
-    led "Y creo que hace bastante tiempo que me gustás."
-
-    "Silencio."
-
-    "Un silencio largo. Terriblemente largo."
-
-    osi "¿Eso era lo que querías decirme?"
-
-    led "Sí."
-
-    osi "¿Y por qué no me lo dijiste antes?"
-
-    led "Porque cada vez que intento hablar contigo, Mankito aparece, o me pongo nervioso, o digo alguna estupidez."
-
-    osi "Lo de Mankito es bastante comprensible."
-
-    "Osiris soltó una pequeña carcajada."
-
-    osi "Ledesma, me gusta estar contigo también."
-
-    "Levanté la mirada."
-
-    osi "No sé exactamente qué esperás que pase después de esto, pero podríamos salir algún día. Vos y yo."
-
-    led "¿En serio?"
-
-    osi "En serio. Pero elegís vos el lugar."
-
-    led "¿Y si elijo mal?"
-
-    osi "Entonces nos reímos y elegimos otro."
-
-    "Por primera vez en toda la tarde, pude respirar con normalidad."
-
-    led "Me parece un buen plan."
-
-    osi "Entonces tenemos una cita."
-
-    "En ese preciso instante, mi celular vibró."
-
-    "Mankito: '¿YA TE DECLARASTE? RESPONDÉ CON UN SÍ O UN NO'."
-
-    osi "¿Es Mankito?"
-
-    led "Lamentablemente."
-
-    osi "Decile que sobreviviste."
-
-    led "Eso es discutible."
-
-    jump final_bueno
+        "Cambiar de tema":
+            jump final_abierto
 
 
 # ============================================================
-# RUTA 2: EVITAR LA CONFESIÓN
-# ============================================================
-
-label evitar_confesion:
-
-    led "¿Viste que cambiaron los horarios de clase?"
-
-    osi "¿Qué?"
-
-    led "Los horarios. De las clases."
-
-    osi "Ledesma, estamos hablando de nosotros y me preguntás por los horarios."
-
-    led "Es un tema importante."
-
-    osi "Claro."
-
-    "Osiris cruzó los brazos, intentando contener una sonrisa."
-
-    osi "¿Hay algo que quieras decirme o vamos a hablar de la facultad toda la tarde?"
-
-    led "Podemos hablar de la facultad."
-
-    osi "Bueno. Entonces tengo que irme a clase."
-
-    led "¡Esperá!"
-
-    "Osiris se detuvo."
-
-    "Había vuelto a cometer el mismo error: intentar escapar de algo que realmente quería hacer."
-
-    led "Perdón. Es que me pongo nervioso cuando estoy contigo."
-
-    osi "¿Por qué?"
-
-    led "Porque me importás. Y no quiero arruinar nuestra amistad diciendo algo que después no pueda retirar."
-
-    "Osiris dejó de sonreír por un momento."
-
-    osi "¿Y quién te dijo que decir lo que sentís tiene que arruinar algo?"
-
-    led "Nadie."
-
-    osi "Entonces quizás estás decidiendo por los dos sin preguntarme qué pienso."
-
-    "No había una respuesta inteligente para eso."
-
-    led "Tenés razón."
-
-    osi "Mirá, ahora tengo que ir a clase. Pero podemos seguir hablando después, ¿sí?"
-
-    led "Sí. Me gustaría."
-
-    osi "Bien. Y la próxima vez, intentá no esconderte detrás de los horarios."
-
-    "Osiris se despidió con una sonrisa y siguió su camino."
-
-    "No había conseguido una cita, ni una respuesta definitiva."
-
-    "Pero tampoco había perdido la oportunidad."
-
-    "A veces, dar el primer paso no significa resolverlo todo. Significa dejar de escapar."
-
-    jump final_abierto
-
-
-# ============================================================
-# FINAL 1: UNA NUEVA OPORTUNIDAD
+# FINAL 1
 # ============================================================
 
 label final_bueno:
 
     scene atardecer2 with fade
 
-    "Al día siguiente, llegué al patio diez minutos antes de lo habitual."
+    show chica at derecha with dissolve
+    show chico sonrie at izquierda with dissolve
 
-    "No porque estuviera nervioso."
+    led "Me gustás, Osiris."
 
-    "Bueno, sí. Estaba nervioso."
+    osi "Vos también me gustás."
 
-    show chico sonrie at chico_normal
+    "Mankito celebra desde algún lugar del patio."
 
-    "Mankito apareció con una bolsa de papitas."
+    mk "¡SABÍA QUE IBA A FUNCIONAR!"
 
-    mk "A ver, contame. ¿Qué pasó?"
-
-    led "Tengo una cita con Osiris."
-
-    mk "¡NO PUEDE SER!"
-
-    led "Bajá la voz."
-
-    mk "¡MI MEJOR AMIGO TIENE UNA CITA!"
-
-    led "Mankito..."
-
-    mk "¡Y YO FUI PARTE FUNDAMENTAL DE ESTE PROCESO!"
-
-    led "Vos casi arruinás todo."
-
-    mk "Detalles."
-
-    "Le di un empujón amistoso."
-
-    mk "Bueno, fuera de joda. Me alegro por vos."
-
-    "Lo miré, sorprendido."
-
-    led "¿Eso fue un sentimiento sincero?"
-
-    mk "No te acostumbres."
-
-    "Nos reímos."
-
-    "A lo lejos, vi a Osiris acercándose."
-
-    "Esta vez no ensayé ninguna frase."
-
-    "Simplemente sonreí y fui a saludarlo."
-
-    osi "¿Listo para nuestra cita?"
-
-    led "Ahora sí."
-
-    "Y por primera vez, no tuve que imaginar cómo podía terminar aquella historia."
-
-    "Solo tenía que vivirla."
+    # Final de la primera ruta
+    "FINAL 1: UNA CITA."
 
     return
 
 
 # ============================================================
-# FINAL 2: CONTINUAR LA HISTORIA
+# FINAL 2
 # ============================================================
 
 label final_abierto:
 
     scene atardecer2 with fade
 
-    "Esa tarde volví a casa pensando en lo que había pasado."
+    show chica at derecha with dissolve
+    show chico at izquierda with dissolve
 
-    "No tenía una respuesta definitiva, pero había conseguido algo importante: ser sincero."
+    led "¿Viste el clima que va a hacer mañana?"
 
-    "Abrí el celular y encontré un mensaje de Mankito."
+    osi "Ledesma... ¿en serio?"
 
-    mk "¿Y? ¿Te rechazó?"
+    "Quizá otro día se anime a decir la verdad."
 
-    led "No."
-
-    mk "¿TE DIJO QUE SÍ?"
-
-    led "Tampoco."
-
-    mk "No entiendo nada."
-
-    led "Yo tampoco, pero vamos a hablar de nuevo."
-
-    mk "Bueno. ¿Una partida de LoL para celebrar?"
-
-    led "No sé qué estamos celebrando."
-
-    mk "Que no te moriste de vergüenza."
-
-    led "Eso sí."
-
-    "Dejé el celular sobre la mesa y sonreí."
-
-    "Mañana volvería a ver a Osiris."
-
-    "Quizás las cosas cambiarían. Quizás seguiríamos siendo amigos."
-
-    "Por ahora, estaba bien no saberlo todo."
-
-    "Al menos esta vez, había dejado de huir."
+    # Final alternativo
+    "FINAL 2: UNA OPORTUNIDAD PENDIENTE."
 
     return
