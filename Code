@@ -1,163 +1,455 @@
-# Coloca el código de tu juego en este archivo.
 
-#DECLARAR LOS PERSONAJES
+# ============================================================
+# PROYECTO: NOVELA VISUAL
+# Materia: Motores Gráficos Aplicados a Videojuegos
+# ============================================================
 
-define osi = Character("Osiris", color = "#DA6FF7")
-define led = Character("Ledesma", color = "#20FAF2")
-define mk  = Character("Mankito", color = "#5A21ED")
+# DECLARACIÓN DE PERSONAJES
 
-# DEFINIR SPRITES
+define osi = Character("Osiris", color="#DA6FF7")
+define led = Character("Ledesma", color="#20FAF2")
+define mk = Character("Mankito", color="#5A21ED")
+
+# DECLARACIÓN DE SPRITES
+
 image chico = "chico.png"
 image chico enfadado = "chicoenfadado.png"
 image chico sonrie = "chicosonrie.png"
-image chico sonrie flip = im.Flip("chicosonrie.png", horizontal= True)
+image chico sonrie flip = im.Flip("chicosonrie.png", horizontal=True)
 
-# COMIENZA EL JUEGO
+# TRANSFORMACIONES
+
+transform chico_normal:
+    xzoom 0.75
+    yzoom 0.75
+
+transform chica_normal:
+    xzoom 0.25
+    yzoom 0.25
+
+transform chica_derecha:
+    xalign 0.70
+    yalign 1.0
+    xzoom 0.25
+    yzoom 0.25
+
+transform chico_izquierda:
+    xalign 0.30
+    yalign 1.0
+    xzoom -0.75
+    yzoom 0.75
+
+
+# ============================================================
+# COMIENZO DEL JUEGO
+# ============================================================
 
 label start:
 
-    # CARGAMOS EL FONDO
     scene atardecer
 
-    #CARGAMOS MUSICA
     play music "music/music.wav" loop fadein 1.0
 
-    #COMIENZA A MOSTRAR TEXTO
-    "Habia estado planeando todo durante horas."
-    "Practique que decirle a Osiris si me lo encontraba."
-    "Hasta le compre una tarjeta en el OXXO de Roblox."
-    "Pero en ese momento aparecio el pe@#!!@# de Mankitos."
+    "Llevaba toda la tarde pensando en qué decirle a Osiris."
 
-    show chico at center:
-        xzoom 0.75 yzoom 0.75
+    "Había ensayado frente al espejo, escrito posibles conversaciones en el celular y hasta comprado una tarjeta en el OXXO."
 
-    mk "Sale un lol?"
-    mk "Vamo a fumar uno?"
-    mk "No voy a entrar a clae"
+    "Una tarjeta. En pleno siglo XXI."
 
-    "Este Pe@#$@# siempre molestando"
+    "Pero cuando uno está enamorado, la dignidad es lo primero que pierde."
 
-    led "NO..."
+    "Solo tenía que encontrarlo, saludarlo y decir algo normal."
 
-    "Me caga este wey"
+    "Algo como: 'Hola, ¿cómo estás?'"
 
-    show chico sonrie
-    mk "Sale ese LOL o no?"
-    mk "Habla pinche wey"
+    "Era imposible que saliera mal."
 
-    "Manquitos no era un mal tipo... solo se droga"
-    "Y ya por la droga, dice inchuerencias"
+    # ENTRA MANKITO
 
-    led "Markitos ya vete, hules mal."
+    show chico at chico_normal
 
-    "En eso ya estaba llegando Osiris"
+    mk "¡LEDEEESMA!"
 
-    transform littleright:
-        xalign 0.65 yalign 1.0
+    "La voz de Mankito atravesó el patio como una alarma de incendio."
 
-    #ENTRA CHICA
+    led "No."
 
-    show chica at littleright behind chico with dissolve:
-        xzoom 0.25 yzoom 0.25 #REDUCIMOS EL TAMANO
+    mk "¿Cómo que no? Ni siquiera te dije qué quería."
 
-    "LLEGO OSIRIS... QUE NERVIOS"
+    led "Porque te conozco."
 
-    show chico sonrie with move:
-        xzoom -0.75
-        xalign 0.30 yalign 1.0
+    mk "Una partida de LoL, unas papitas y después vemos qué pasa."
 
-    #SUENA RELOJ
+    led "Tengo cosas que hacer."
+
+    mk "¿Qué cosas?"
+
+    led "Cosas."
+
+    mk "Ah, ya entendí. Estás pensando en Osiris."
+
+    "Me quedé inmóvil."
+
+    led "¿Podés hablar un poquito más bajo?"
+
+    mk "¡ESTÁ PENSANDO EN OSIRIS!"
+
+    led "Te voy a tirar por las escaleras."
+
+    mk "Eso significa que sí."
+
+    "Mankito era mi mejor amigo. También era la razón por la que necesitaba vacaciones de mi mejor amigo."
+
+    mk "Escuchame. Si te gusta, hablale."
+
+    led "Gracias, gurú del amor."
+
+    mk "De nada. Mi tarifa son unas papitas."
+
+    "Me acomodé la ropa y revisé que todavía tuviera la tarjeta en el bolsillo."
+
+    "Todo estaba bajo control."
+
+    mk "¿Y qué le vas a decir?"
+
+    led "No sé."
+
+    mk "Perfecto. Improvisá."
+
+    led "Tu consejo es una porquería."
+
+    mk "Pero es gratis."
+
+    # SE ANUNCIA LA LLEGADA DE OSIRIS
+
+    "Entonces vi a Osiris acercándose por el patio."
+
+    "Mi corazón decidió que era un excelente momento para dejar de funcionar."
+
+    show chica at chica_derecha behind chico with dissolve
+
+    "Osiris venía mirando el celular, completamente ajeno al desastre emocional que estaba ocurriendo a pocos metros."
+
+    led "Mankito, por favor. Andate."
+
+    mk "¿Por qué? Si yo te estoy ayudando."
+
+    led "Porque estás gritando y porque necesito hablar con él."
+
+    mk "Ah, claro. Querés privacidad."
+
+    led "Exactamente."
+
+    mk "Entendido."
+
+    "Por primera vez en su vida, Mankito pareció comprender una instrucción sencilla."
+
     play sound "sound/tower_clock.ogg"
     queue sound "sound/tower_clock.ogg"
-    queue sound "sound/tower_clock.ogg"
-    queue sound "sound/tower_clock.ogg"
-    queue sound "sound/tower_clock.ogg"
 
-    "Markitos en estado de dorgas, entendio que se tenia que ir"
+    mk "Bueno, me voy."
+
+    "Dio dos pasos."
+
+    mk "¡PERO DESPUÉS ME CONTÁS TODO!"
+
+    led "¡ANDATE!"
 
     hide chico with dissolve
 
-    "Osiris ve como Mankitos se retira"
+    "Mankito desapareció por el pasillo, probablemente en busca de otra persona a la que arruinarle la tarde."
 
     show chica at center with move
 
-    stop music fadeout 1.0 #PARA MUSICA
+    stop music fadeout 1.0
 
-    osi "..."
+    osi "¿Estabas discutiendo con Mankito otra vez?"
 
+    led "No. Bueno, sí. Es complicado."
 
-    #COMIENZO A MOSTRAR TEXTO
+    osi "¿Qué hizo ahora?"
+
+    led "Lo de siempre. Intentar convencerme de que jugar al LoL es una actividad productiva."
+
+    osi "Tiene sus prioridades claras."
+
+    led "Ojalá yo tuviera las mías."
+
+    "Osiris sonrió."
+
+    "Había imaginado ese momento tantas veces que ahora no sabía qué hacer con él."
 
     play music "music/sovereign.mp3" fadein 0.5
-    "Mientras estaba dando un paseo, vi a Osiris."
-    "Se me quedo viendo, mientras jugaba Roblox."
 
-    osi "..."
-    "Se veia tan lindo, no sabia que decirle."
+    osi "¿Estás bien? Parecés nervioso."
 
-    led "Hola"
-    "No sabia que mas decirle."
+    led "¿Yo? Para nada."
+
+    osi "Estás hablando como si estuvieras rindiendo un examen."
+
+    led "Es mi voz normal."
+
+    osi "Ledesma, te conozco."
+
+    "Eso era lo peor."
+
+    "Osiris me conocía lo suficiente como para notar que algo me pasaba, pero no lo suficiente como para saber qué era."
+
+    osi "¿Querías decirme algo?"
+
+    "La tarjeta del OXXO pesaba como una tonelada dentro de mi bolsillo."
+
+    # DECISIÓN PRINCIPAL
 
     menu:
-        "Recordar.":
-            jump escena2
+        "Decirle la verdad.":
+            jump confesion
 
-    # ESCENA 2
-
-    label escena2:
-
-    #CARGAMOS EL FONDO CON TRANSICION
-        scene atardecer2 with fade
-
-        "Recorde la primera vez que vi a Osiris sudando."
-        "Se veia tan lindo mientras se tocaba sus coletas del pelo."
+        "Cambiar de tema y ganar tiempo.":
+            jump evitar_confesion
 
 
-    #SALTAMOS A LA NUECA ESCENA
-        menu:
-            "Volver a la realidad.":
-                jump dialogo
+# ============================================================
+# RUTA 1: CONFESIÓN
+# ============================================================
 
-    #ESCENA DONDE HABLAN LOS PERSONAJES
+label confesion:
 
-    label dialogo:
+    led "Sí. Quería decirte algo."
 
-        scene atardecer
+    osi "Te escucho."
 
-        show chica at right:
-            xzoom 0.25 yzoom 0.25
+    "Respiré profundamente."
 
-        "Osiris me vio con extraneza."
+    led "Me gusta pasar tiempo contigo."
 
-        show chica at center
+    led "Y creo que hace bastante tiempo que me gustás."
 
-        osi "En que estas pensando... papucho"
-        led "Me hulen las bolas"
-        osi "tines hambre"
-        led "si..."
-        osi "pues pica de mi fiambre"
+    "Silencio."
 
-        # MOSTRAMOS DOS OPCIONES
+    "Un silencio largo. Terriblemente largo."
 
-        menu:
-            "Picar fiambre":
-                jump verdad
-            "No Picar fiambre":
-                jump mentira
+    osi "¿Eso era lo que querías decirme?"
 
-        # ESCENA EN LA QUE PICAMOS EL FIAMBRE
-        label verdad:
+    led "Sí."
 
-            "Pica el fiambre Ledesama"
-            jump fin
+    osi "¿Y por qué no me lo dijiste antes?"
 
-        # ESCENA EN LA QUE NO PICAMOS EL FIAMBRE
-        label mentira:
+    led "Porque cada vez que intento hablar contigo, Mankito aparece, o me pongo nervioso, o digo alguna estupidez."
 
-            "NO Picar el fiambre Ledesama"
-            jump fin
+    osi "Lo de Mankito es bastante comprensible."
 
-        label fin:
-        # TERMINA EL JUEGO
+    "Osiris soltó una pequeña carcajada."
+
+    osi "Ledesma, me gusta estar contigo también."
+
+    "Levanté la mirada."
+
+    osi "No sé exactamente qué esperás que pase después de esto, pero podríamos salir algún día. Vos y yo."
+
+    led "¿En serio?"
+
+    osi "En serio. Pero elegís vos el lugar."
+
+    led "¿Y si elijo mal?"
+
+    osi "Entonces nos reímos y elegimos otro."
+
+    "Por primera vez en toda la tarde, pude respirar con normalidad."
+
+    led "Me parece un buen plan."
+
+    osi "Entonces tenemos una cita."
+
+    "En ese preciso instante, mi celular vibró."
+
+    "Mankito: '¿YA TE DECLARASTE? RESPONDÉ CON UN SÍ O UN NO'."
+
+    osi "¿Es Mankito?"
+
+    led "Lamentablemente."
+
+    osi "Decile que sobreviviste."
+
+    led "Eso es discutible."
+
+    jump final_bueno
+
+
+# ============================================================
+# RUTA 2: EVITAR LA CONFESIÓN
+# ============================================================
+
+label evitar_confesion:
+
+    led "¿Viste que cambiaron los horarios de clase?"
+
+    osi "¿Qué?"
+
+    led "Los horarios. De las clases."
+
+    osi "Ledesma, estamos hablando de nosotros y me preguntás por los horarios."
+
+    led "Es un tema importante."
+
+    osi "Claro."
+
+    "Osiris cruzó los brazos, intentando contener una sonrisa."
+
+    osi "¿Hay algo que quieras decirme o vamos a hablar de la facultad toda la tarde?"
+
+    led "Podemos hablar de la facultad."
+
+    osi "Bueno. Entonces tengo que irme a clase."
+
+    led "¡Esperá!"
+
+    "Osiris se detuvo."
+
+    "Había vuelto a cometer el mismo error: intentar escapar de algo que realmente quería hacer."
+
+    led "Perdón. Es que me pongo nervioso cuando estoy contigo."
+
+    osi "¿Por qué?"
+
+    led "Porque me importás. Y no quiero arruinar nuestra amistad diciendo algo que después no pueda retirar."
+
+    "Osiris dejó de sonreír por un momento."
+
+    osi "¿Y quién te dijo que decir lo que sentís tiene que arruinar algo?"
+
+    led "Nadie."
+
+    osi "Entonces quizás estás decidiendo por los dos sin preguntarme qué pienso."
+
+    "No había una respuesta inteligente para eso."
+
+    led "Tenés razón."
+
+    osi "Mirá, ahora tengo que ir a clase. Pero podemos seguir hablando después, ¿sí?"
+
+    led "Sí. Me gustaría."
+
+    osi "Bien. Y la próxima vez, intentá no esconderte detrás de los horarios."
+
+    "Osiris se despidió con una sonrisa y siguió su camino."
+
+    "No había conseguido una cita, ni una respuesta definitiva."
+
+    "Pero tampoco había perdido la oportunidad."
+
+    "A veces, dar el primer paso no significa resolverlo todo. Significa dejar de escapar."
+
+    jump final_abierto
+
+
+# ============================================================
+# FINAL 1: UNA NUEVA OPORTUNIDAD
+# ============================================================
+
+label final_bueno:
+
+    scene atardecer2 with fade
+
+    "Al día siguiente, llegué al patio diez minutos antes de lo habitual."
+
+    "No porque estuviera nervioso."
+
+    "Bueno, sí. Estaba nervioso."
+
+    show chico sonrie at chico_normal
+
+    "Mankito apareció con una bolsa de papitas."
+
+    mk "A ver, contame. ¿Qué pasó?"
+
+    led "Tengo una cita con Osiris."
+
+    mk "¡NO PUEDE SER!"
+
+    led "Bajá la voz."
+
+    mk "¡MI MEJOR AMIGO TIENE UNA CITA!"
+
+    led "Mankito..."
+
+    mk "¡Y YO FUI PARTE FUNDAMENTAL DE ESTE PROCESO!"
+
+    led "Vos casi arruinás todo."
+
+    mk "Detalles."
+
+    "Le di un empujón amistoso."
+
+    mk "Bueno, fuera de joda. Me alegro por vos."
+
+    "Lo miré, sorprendido."
+
+    led "¿Eso fue un sentimiento sincero?"
+
+    mk "No te acostumbres."
+
+    "Nos reímos."
+
+    "A lo lejos, vi a Osiris acercándose."
+
+    "Esta vez no ensayé ninguna frase."
+
+    "Simplemente sonreí y fui a saludarlo."
+
+    osi "¿Listo para nuestra cita?"
+
+    led "Ahora sí."
+
+    "Y por primera vez, no tuve que imaginar cómo podía terminar aquella historia."
+
+    "Solo tenía que vivirla."
+
+    return
+
+
+# ============================================================
+# FINAL 2: CONTINUAR LA HISTORIA
+# ============================================================
+
+label final_abierto:
+
+    scene atardecer2 with fade
+
+    "Esa tarde volví a casa pensando en lo que había pasado."
+
+    "No tenía una respuesta definitiva, pero había conseguido algo importante: ser sincero."
+
+    "Abrí el celular y encontré un mensaje de Mankito."
+
+    mk "¿Y? ¿Te rechazó?"
+
+    led "No."
+
+    mk "¿TE DIJO QUE SÍ?"
+
+    led "Tampoco."
+
+    mk "No entiendo nada."
+
+    led "Yo tampoco, pero vamos a hablar de nuevo."
+
+    mk "Bueno. ¿Una partida de LoL para celebrar?"
+
+    led "No sé qué estamos celebrando."
+
+    mk "Que no te moriste de vergüenza."
+
+    led "Eso sí."
+
+    "Dejé el celular sobre la mesa y sonreí."
+
+    "Mañana volvería a ver a Osiris."
+
+    "Quizás las cosas cambiarían. Quizás seguiríamos siendo amigos."
+
+    "Por ahora, estaba bien no saberlo todo."
+
+    "Al menos esta vez, había dejado de huir."
 
     return
